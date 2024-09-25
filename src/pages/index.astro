@@ -1,5 +1,16 @@
 ---
 import { MapView } from '../components/MapView.tsx'
+import { Entry } from '../server'
+
+const entries: Entry[] = [
+	{
+	  title: "test",
+	  description: "lorem ipsum dolor sit amet",
+		images: ["https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F8b%2Ffe%2F2f%2F8bfe2fc268abda981133434a4c1ec8b3.jpg&f=1&nofb=1&ipt=9efc334a3893a5aa7ab67842980a322b1b8ee13b23c277477e1f301a90a0fe2c&ipo=images"],
+	  markerX: 20,
+	  markerY: 30,
+	}
+]
 ---
 
 <html lang="en">
@@ -19,7 +30,7 @@ import { MapView } from '../components/MapView.tsx'
 			<h1>Map describer</h1>
 		</header>
 		<main class="container">
-			<MapView points={[[60, 80]]} client:load>
+			<MapView entries={entries} client:load>
 		</main>
 		<style global>
 			.marker {

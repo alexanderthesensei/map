@@ -1,20 +1,23 @@
-import { memo, useMemo, useState, type MouseEventHandler } from "react";
+import { useState } from "react";
+import type { Entry } from "../server";
 
-type Position = [number, number];
-
-export function MapView({ points }: { points: Position[] }) {
-  const { setOpen: setModalOpen, Modal } = renderModal();
+export function MapView({ entries }: { entries: Entry[] }) {
+  const modal = renderModal();
+  const Modal = modal.Modal;
 
   return (
     <div>
       <div style={{ position: "relative" }}>
-        {points.map((point) => (
+        {entries.map((entry) => (
           <Marker
-            x={point[0]}
-            y={point[1]}
-            name="exampleMark"
+            x={entry.markerX}
+            y={entry.markerY}
+            name={entry.title}
             onClick={() => {
-              setModalOpen(true);
+              modal.setOpen(true);
+              modal.setTitle(entry.title);
+              modal.setDescription(entry.description);
+              modal.setImages(entry.images);
             }}
           />
         ))}
@@ -54,10 +57,9 @@ function Marker({
 function renderModal() {
   const [lastState, setLastState] = useState(false);
   const [open, setOpen] = useState(false);
-
-  const images = [
-    "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F8b%2Ffe%2F2f%2F8bfe2fc268abda981133434a4c1ec8b3.jpg&f=1&nofb=1&ipt=9efc334a3893a5aa7ab67842980a322b1b8ee13b23c277477e1f301a90a0fe2c&ipo=images",
-  ];
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [images, setImages] = useState<string[]>([]);
 
   const className = open
     ? "modal-open modal-is-" + (lastState ? "closing" : "opening")
@@ -75,13 +77,16 @@ function renderModal() {
       setLastState(open);
       setOpen(value);
     },
+    setTitle,
+    setDescription,
+    setImages,
     Modal: () => (
       <div className={className}>
         <dialog open={open} onClick={handleClick}>
           <article className="grid">
             <div>
-              <h2>Whatever the marker is about</h2>
-              <p>lorem ipsum dolor sit amet</p>
+              <h2>{title}</h2>
+              <p>{description}</p>
             </div>
             <Gallery images={images} />
           </article>
