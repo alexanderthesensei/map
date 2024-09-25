@@ -1,5 +1,5 @@
 ---
-
+import { MapView } from '../components/MapView.tsx'
 ---
 
 <html lang="en">
@@ -8,9 +8,23 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<link
+		  rel="stylesheet"
+		  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.lime.min.css"
+		>
+		<title>Map Describer</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<header class="container">
+			<h1>Map describer</h1>
+		</header>
+		<main class="container">
+			<MapView points={[[60, 80]]} client:load>
+		</main>
+		<style global>
+			.marker {
+				border-radius: 60px;
+			}
+		</style>
 	</body>
 </html>
