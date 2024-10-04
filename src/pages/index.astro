@@ -18,13 +18,15 @@ const map = maps[0];
 		<title>Map Describer</title>
 	</head>
 	<body>
-		<header class="container-fluid">
-			<h1>Map describer</h1>
-		</header>
-		<main class="container-fluid">
+		<main>
 			<MapView map={map} client:load>
 		</main>
 		<style global>
+			main {
+				width: fit-content;
+				margin: 0 auto;
+			}
+
 			.marker {
 				border-radius: 60px;
 				aspect-ratio: 1;

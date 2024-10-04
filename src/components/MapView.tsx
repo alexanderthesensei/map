@@ -8,6 +8,7 @@ export function MapView({ map: { url, entries } }: { map: Map }) {
   return (
     <div>
       <div style={{ position: "relative" }}>
+        <img src={url} alt="map" />
         {entries.map((entry) => (
           <Marker
             x={entry.markerX}
@@ -22,7 +23,6 @@ export function MapView({ map: { url, entries } }: { map: Map }) {
           />
         ))}
       </div>
-      <img src={url} alt="map" />
 
       <Modal />
     </div>
@@ -43,7 +43,7 @@ function Marker({
   return (
     <button
       className="marker"
-      style={{ position: "absolute", left: x, top: y }}
+      style={{ position: "absolute", left: x + "%", top: y + "%" }}
       onClick={() => onClick(name)}
     />
   );

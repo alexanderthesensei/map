@@ -23,8 +23,8 @@ export const maps: Map[] = [
         images: [
           "https://upload.wikimedia.org/wikipedia/commons/4/43/Location_North_America.svg",
         ],
-        markerX: 150,
-        markerY: 170,
+        markerX: 11,
+        markerY: 27,
       },
       {
         title: "Евра́зия",
@@ -33,8 +33,8 @@ export const maps: Map[] = [
         images: [
           "https://upload.wikimedia.org/wikipedia/commons/3/30/Eurasia_%28orthographic_projection%29.svg",
         ],
-        markerX: 840,
-        markerY: 100,
+        markerX: 61,
+        markerY: 16,
       },
       {
         title: "А́фрика",
@@ -43,8 +43,8 @@ export const maps: Map[] = [
         images: [
           "https://upload.wikimedia.org/wikipedia/commons/8/86/Africa_%28orthographic_projection%29.svg",
         ],
-        markerX: 635,
-        markerY: 300,
+        markerX: 46,
+        markerY: 48,
       },
       {
         title: "Австралия",
@@ -53,8 +53,8 @@ export const maps: Map[] = [
         images: [
           "https://upload.wikimedia.org/wikipedia/commons/d/da/Australia_with_AAT_%28orthographic_projection%29.svg",
         ],
-        markerX: 1080,
-        markerY: 460,
+        markerX: 79,
+        markerY: 73,
       },
       {
         title: "Южная Америка",
@@ -63,8 +63,8 @@ export const maps: Map[] = [
         images: [
           "https://upload.wikimedia.org/wikipedia/commons/0/0f/South_America_%28orthographic_projection%29.svg",
         ],
-        markerX: 320,
-        markerY: 420,
+        markerX: 23,
+        markerY: 67,
       },
     ],
   },
