@@ -1,7 +1,7 @@
 import { useState } from "react";
-import type { Entry } from "../server";
+import type { Map } from "../server";
 
-export function MapView({ entries }: { entries: Entry[] }) {
+export function MapView({ map: {url, entries} }: { map: Map}) {
   const modal = renderModal();
   const Modal = modal.Modal;
 
@@ -23,7 +23,7 @@ export function MapView({ entries }: { entries: Entry[] }) {
         ))}
       </div>
       <img
-        src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Forig11.deviantart.net%2F562f%2Ff%2F2016%2F089%2Fc%2Fb%2Fcb44bc8b275d1eafbbf7fcf13c400b7c-d9x29tt.jpg&f=1&nofb=1&ipt=0cc2a54840da7c00628d6e2af39e857f60d4fb1fd9501f9be5ba5a0752a27e8b&ipo=images"
+        src={url}
         alt="map"
       />
 
@@ -48,9 +48,7 @@ function Marker({
       className="marker"
       style={{ position: "absolute", left: x, top: y }}
       onClick={() => onClick(name)}
-    >
-      M
-    </button>
+    />
   );
 }
 

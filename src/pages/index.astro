@@ -1,16 +1,8 @@
 ---
 import { MapView } from '../components/MapView.tsx'
-import { Entry } from '../server'
+import { maps } from '../server'
 
-const entries: Entry[] = [
-	{
-	  title: "test",
-	  description: "lorem ipsum dolor sit amet",
-		images: ["https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F8b%2Ffe%2F2f%2F8bfe2fc268abda981133434a4c1ec8b3.jpg&f=1&nofb=1&ipt=9efc334a3893a5aa7ab67842980a322b1b8ee13b23c277477e1f301a90a0fe2c&ipo=images"],
-	  markerX: 20,
-	  markerY: 30,
-	}
-]
+const map = maps[0];
 ---
 
 <html lang="en">
@@ -21,20 +13,28 @@ const entries: Entry[] = [
 		<meta name="generator" content={Astro.generator} />
 		<link
 		  rel="stylesheet"
-		  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.lime.min.css"
+		  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.amber.min.css"
 		>
 		<title>Map Describer</title>
 	</head>
 	<body>
-		<header class="container">
+		<header class="container-fluid">
 			<h1>Map describer</h1>
 		</header>
-		<main class="container">
-			<MapView entries={entries} client:load>
+		<main class="container-fluid">
+			<MapView map={map} client:load>
 		</main>
 		<style global>
 			.marker {
 				border-radius: 60px;
+				aspect-ratio: 1;
+				width: 30px;
+				padding: 0;
+				margin: 0;
+			}
+
+			dialog article {
+				max-width: 100%;
 			}
 		</style>
 	</body>
