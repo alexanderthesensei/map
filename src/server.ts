@@ -1,4 +1,5 @@
 export type Map = {
+  name: string;
   url: string;
   entries: Entry[];
 };
@@ -14,6 +15,7 @@ export type Entry = {
 
 export const maps: Map[] = [
   {
+    name: "карта мира",
     url: "https://upload.wikimedia.org/wikipedia/commons/1/17/BlankMap-World-noborders.png",
     entries: [
       {
@@ -69,6 +71,7 @@ export const maps: Map[] = [
     ],
   },
   {
+    name: "2.5d test",
     url: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Forig11.deviantart.net%2F562f%2Ff%2F2016%2F089%2Fc%2Fb%2Fcb44bc8b275d1eafbbf7fcf13c400b7c-d9x29tt.jpg&f=1&nofb=1&ipt=0cc2a54840da7c00628d6e2af39e857f60d4fb1fd9501f9be5ba5a0752a27e8b&ipo=images",
     entries: [
       {
@@ -77,7 +80,7 @@ export const maps: Map[] = [
         images: [
           "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F8b%2Ffe%2F2f%2F8bfe2fc268abda981133434a4c1ec8b3.jpg&f=1&nofb=1&ipt=9efc334a3893a5aa7ab67842980a322b1b8ee13b23c277477e1f301a90a0fe2c&ipo=images",
         ],
-        markerX: 20,
+        markerX: 60,
         markerY: 30,
       },
     ],
