@@ -6,7 +6,7 @@ export function MapView({ map: { url, entries } }: { map: Map }) {
   const Modal = modal.Modal;
 
   return (
-    <div>
+    <div className="mapview">
       <div style={{ position: "relative" }}>
         <img src={url} alt="map" />
         {entries.map((entry) => (

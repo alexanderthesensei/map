@@ -80,8 +80,8 @@ export const maps: Map[] = [
         images: [
           "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F8b%2Ffe%2F2f%2F8bfe2fc268abda981133434a4c1ec8b3.jpg&f=1&nofb=1&ipt=9efc334a3893a5aa7ab67842980a322b1b8ee13b23c277477e1f301a90a0fe2c&ipo=images",
         ],
-        markerX: 60,
-        markerY: 30,
+        markerX: 16,
+        markerY: 13,
       },
     ],
   },
