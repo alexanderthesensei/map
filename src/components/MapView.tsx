@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { Map } from "../server";
 
-export function MapView({ map: {url, entries} }: { map: Map}) {
+export function MapView({ map: { url, entries } }: { map: Map }) {
   const modal = renderModal();
   const Modal = modal.Modal;
 
@@ -22,10 +22,7 @@ export function MapView({ map: {url, entries} }: { map: Map}) {
           />
         ))}
       </div>
-      <img
-        src={url}
-        alt="map"
-      />
+      <img src={url} alt="map" />
 
       <Modal />
     </div>
