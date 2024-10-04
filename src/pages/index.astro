@@ -1,8 +1,6 @@
 ---
 import { MapView } from '../components/MapView.tsx'
 import { maps } from '../server'
-
-const map = maps[0];
 ---
 
 <html lang="en">
@@ -19,7 +17,9 @@ const map = maps[0];
 	</head>
 	<body>
 		<main>
-			<MapView map={map} client:load>
+			{maps.map(map => (
+				<MapView map={map} client:load />
+			))}
 		</main>
 		<style global>
 			main {
