@@ -17,15 +17,24 @@ import { maps } from '../server'
 	</head>
 	<body>
 		<main>
-			{maps.map(map => (
-				<section class="page" id={map.name}>
+			{maps.map((map, idx) => {
+				const prevMapName = maps[idx-1]?.name;
+				const nextMapName = maps[idx+1]?.name;
+
+				return <section class="page" id={map.name}>
 					<MapView map={map} client:load />
+
+					<div class="bottomnav">
+						{prevMapName && <a href={"#" + prevMapName}>prev</a>}
+						{nextMapName && <a href={"#" + nextMapName}>next</a>}
+					</div>
 				</section>
-			))}
+			})}
 		</main>
 		<style global>
 			main {
 				width: 100%;
+				padding: 0 !important;
 			}
 
 			img {
@@ -44,15 +53,24 @@ import { maps } from '../server'
 				height: 100dvh;
 				display: flex;
 				align-items: center;
+				position: relative;
 			}
 
 			.mapview {
 				width: 100%;
 			}
 
+			.bottomnav {
+				position: absolute;
+				bottom: 0;
+				right: 0;
+			}
+
 			dialog article {
 				max-width: 100%;
 			}
+
+			body {overflow: hidden;}
 		</style>
 	</body>
 </html>
