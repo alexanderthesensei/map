@@ -1,6 +1,8 @@
 import { useState } from "react";
 import type { Map } from "../server";
 
+const OPENING_MODAL_DELAY = 600;
+
 export function MapView({ map: { url, entries } }: { map: Map }) {
   const modal = renderModal();
   const Modal = modal.Modal;
@@ -55,14 +57,21 @@ function renderModal() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [images, setImages] = useState<string[]>([]);
+  const [opening, setOpening] = useState(false);
 
   const className = open
-    ? "modal-open modal-is-" + (lastState ? "closing" : "opening")
+    ? "modal-open" + (lastState ? " modal-is-closing":"") + (opening ?" modal-is-opening":"")
     : "";
 
   function close() {
-      setLastState(open);
-      setTimeout(() => setOpen(false), 1000);
+      if (opening) {
+        return
+      }
+      setLastState(true);
+      setTimeout(() => {
+        setOpen(false);
+        setLastState(false);
+      }, OPENING_MODAL_DELAY);
   }
 
   function handleClick(event: any) {
@@ -75,6 +84,8 @@ function renderModal() {
     setOpen: (value: boolean) => {
       setLastState(open);
       setOpen(value);
+      setOpening(true);
+      setTimeout(() => setOpening(false), OPENING_MODAL_DELAY)
     },
     setTitle,
     setDescription,
