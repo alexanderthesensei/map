@@ -7,5 +7,5 @@ import react from '@astrojs/react';
 export default defineConfig({
   integrations: [react()],
   site: 'https://alexanderthesensei.github.io',
-  base: 'history'
+  base: 'history_display'
 });
