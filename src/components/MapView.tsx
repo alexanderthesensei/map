@@ -60,10 +60,14 @@ function renderModal() {
     ? "modal-open modal-is-" + (lastState ? "closing" : "opening")
     : "";
 
+  function close() {
+      setLastState(open);
+      setTimeout(() => setOpen(false), 1000);
+  }
+
   function handleClick(event: any) {
     if (event.target === event.currentTarget) {
-      setLastState(open);
-      setOpen(false);
+      close()
     }
   }
 
@@ -80,7 +84,10 @@ function renderModal() {
         <dialog open={open} onClick={handleClick}>
           <article className="grid">
             <div>
-              <h2>{title}</h2>
+              <h2>
+                {title + ' '}
+                <button onClick={close}>X</button>
+              </h2>
               <p>{description}</p>
             </div>
             <Gallery images={images} />
