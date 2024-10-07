@@ -20,7 +20,7 @@ export function MapView({ map: { url, entries } }: { map: Map }) {
               modal.setOpen(true);
               modal.setTitle(entry.title);
               modal.setDescription(entry.description);
-              modal.setImages(entry.images);
+              modal.setChildren(entry.children);
             }}
           />
         ))}
@@ -56,7 +56,7 @@ function renderModal() {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [images, setImages] = useState<string[]>([]);
+  const [children, setChildren] = useState<Map[]>([]);
   const [opening, setOpening] = useState(false);
 
   const className = open
@@ -89,7 +89,7 @@ function renderModal() {
     },
     setTitle,
     setDescription,
-    setImages,
+    setChildren,
     Modal: () => (
       <div className={className}>
         <dialog open={open} onClick={handleClick}>
@@ -101,20 +101,12 @@ function renderModal() {
               </h2>
               <p>{description}</p>
             </div>
-            <Gallery images={images} />
+            <div>
+              {children.map(child => <MapView map={child} />)}
+            </div>
           </article>
         </dialog>
       </div>
     ),
   };
-}
-
-function Gallery({ images }: { images: string[] }) {
-  return (
-    <div>
-      {images.map((url) => (
-        <img src={url} />
-      ))}
-    </div>
-  );
 }
