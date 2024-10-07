@@ -22,7 +22,7 @@ function imgToMap(url: string): Map {
 }
 
 export const map: Map = {
-  url: "/history_display/index.svg",
+  url: "/map/index.svg",
   entries: [
     {
       title: "world map",
