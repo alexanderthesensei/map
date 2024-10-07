@@ -1,22 +1,22 @@
-# Interactive maps
-This is our history project. Our professor saw something like this at a museum and wanted her own version.
+# Интерактивные карты
+Это наш проект по истории. Наша преподавательница увидела нечто подобное в музее и захотела создать свою версию.
 
-## Architecture
-The data is added by directly altering the source code. The reason for doing it this way instead of having a database is that
-1. Doing it like this is easier and more safe, I have literally zero attack surface
-2. When I stop actively maintaining this project, it won't die because I didn't pay for the server - the hosting on GitHub is free
+## Архитектура
+Данные добавляются прямым изменением исходного кода. Я сделал так вместо использования базы данных потому, что
+1. Это проще и безопаснее, у этой программы буквально нулевая поверхность атаки.
+2. Когда я перестану активно поддерживать этот проект, он не умрет, потому что я не заплатил за сервер - хостинг на GitHub бесплатный.
 
-It is stored in `src/data.json`.
+Данные хранятся в `src/data.json`.
 
-## Adding new data
-If you want to add any images, put it in the `public` directory first and commit that. The commit message must start with `data: `.
+## Добавление новых данных
+Если вы хотите добавить картинки, сначала поместите их в директорию `public` и закоммитьте это. Сообщение коммита должно начинаться с `data: `.
 
-A map has an image and may have points (entries).
-Each point has a title, a description and may contain one or more maps (placed inside `children`). If you want to put an image in it, wrap the url using the `imgToMap` function, like this:
+Каждая карта имеет фоновое изображение и может иметь точки (`entries`).
+Каждая точка имеет заголовок, описание и может содержать одну или несколько карт (размещенных внутри `children`). Если вы хотите поместить туда изображение вместо карты, оберните url функцией `imgToMap`, вот пример:
 ```ts
 imgToMap("https://upload.wikimedia.org/wikipedia/commons/4/44/Europe_orthographic_Caucasus_Urals_boundary_%28with_borders%29.svg")
 ```
 
-Everything but the `children` (nested maps or images) can be generated using a [graphical editor](https://alexanderthesensei.github.io/map/edit) I made the other day.
-There is no nesting support because that would make both the UI and the code way more complicated.
-You fill in the data on the right, check that everything works on the left, copy the code on the bottom and put it inside the appropriate `children` field in `data.ts`.
+Всё, кроме `children` (вложенных карт или изображений), может быть сгенерировано с помощью [графического редактора](https://alexanderthesensei.github.io/map/edit).
+В нем нет поддержки вложенности, потому что это бы значительно усложнило как пользовательский интерфейс, так и код.
+Вы заполняете данные справа, проверяете, что все работает слева, копируете код снизу и помещаете его в соответствующее поле `children` в `data.ts`.
