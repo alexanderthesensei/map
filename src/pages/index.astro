@@ -1,6 +1,6 @@
 ---
 import { MapView } from '../components/MapView.tsx'
-import { maps } from '../server'
+import { map } from '../server'
 ---
 
 <html lang="ru">
@@ -17,19 +17,7 @@ import { maps } from '../server'
 	</head>
 	<body>
 		<main>
-			{maps.map((map, idx) => {
-				const prevMapName = maps[idx-1]?.name;
-				const nextMapName = maps[idx+1]?.name;
-
-				return <section class="page" id={map.name}>
-					<MapView map={map} client:load />
-
-					<div class="bottomnav">
-						{prevMapName && <a href={"#" + prevMapName}>prev</a>}
-						{nextMapName && <a href={"#" + nextMapName}>next</a>}
-					</div>
-				</section>
-			})}
+			<MapView map={map} client:load />
 		</main>
 		<style is:global>
 			main {
@@ -50,16 +38,9 @@ import { maps } from '../server'
 				transform: translate(-25px, -25px);
 			}
 
-			.page {
-				height: 100dvh;
-				display: flex;
-				align-items: center;
-				position: relative;
-				margin: 0;
-			}
-
 			.mapview {
 				height: 100%;
+				width: fit-content;
 				margin: 0 auto;
 			}
 

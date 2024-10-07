@@ -60,23 +60,25 @@ function renderModal() {
   const [opening, setOpening] = useState(false);
 
   const className = open
-    ? "modal-open" + (lastState ? " modal-is-closing":"") + (opening ?" modal-is-opening":"")
+    ? "modal-open" +
+      (lastState ? " modal-is-closing" : "") +
+      (opening ? " modal-is-opening" : "")
     : "";
 
   function close() {
-      if (opening) {
-        return
-      }
-      setLastState(true);
-      setTimeout(() => {
-        setOpen(false);
-        setLastState(false);
-      }, OPENING_MODAL_DELAY);
+    if (opening) {
+      return;
+    }
+    setLastState(true);
+    setTimeout(() => {
+      setOpen(false);
+      setLastState(false);
+    }, OPENING_MODAL_DELAY);
   }
 
   function handleClick(event: any) {
     if (event.target === event.currentTarget) {
-      close()
+      close();
     }
   }
 
@@ -85,7 +87,7 @@ function renderModal() {
       setLastState(open);
       setOpen(value);
       setOpening(true);
-      setTimeout(() => setOpening(false), OPENING_MODAL_DELAY)
+      setTimeout(() => setOpening(false), OPENING_MODAL_DELAY);
     },
     setTitle,
     setDescription,
@@ -96,13 +98,15 @@ function renderModal() {
           <article className="grid">
             <div>
               <h2>
-                {title + ' '}
+                {title + " "}
                 <button onClick={close}>X</button>
               </h2>
               <p>{description}</p>
             </div>
             <div>
-              {children.map(child => <MapView map={child} />)}
+              {children.map((child) => (
+                <MapView map={child} />
+              ))}
             </div>
           </article>
         </dialog>
