@@ -3,19 +3,13 @@ import type { Map } from "../server";
 
 const OPENING_MODAL_DELAY = 600;
 
-export function MapView({
-  map: { url, entries },
-  uid,
-}: {
-  map: Map;
-  uid?: string;
-}) {
+export function MapView({ map: { url, entries } }: { map: Map }) {
   const modal = renderModal();
   const Modal = modal.Modal;
 
   return (
     <div className="mapview">
-      <div style={{ position: "relative" }} className="points" id={uid}>
+      <div style={{ position: "relative" }} className="points">
         <img src={url} alt="Не могу загрузить карту" />
         {entries.map((entry) => (
           <Marker
