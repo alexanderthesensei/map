@@ -80,13 +80,24 @@ export function MapEdit() {
             <fieldset key={entry.title}>
               <fieldset role="group">
                 <input readOnly value={entry.title} />
-                <input type="button" value="Delete" onClick={() => setEntries(entries.toSpliced(idx, 1))} />
+                <input
+                  type="button"
+                  value="Delete"
+                  onClick={() => setEntries(entries.toSpliced(idx, 1))}
+                />
               </fieldset>
-              <textarea placeholder="description" onInput={(event) => setEntries([
-                ...entries.slice(0, idx),
-                {...entry, description: event.currentTarget.value},
-                ...entries.slice(idx+1)
-              ])}>{entry.description}</textarea>
+              <textarea
+                placeholder="description"
+                onInput={(event) =>
+                  setEntries([
+                    ...entries.slice(0, idx),
+                    { ...entry, description: event.currentTarget.value },
+                    ...entries.slice(idx + 1),
+                  ])
+                }
+              >
+                {entry.description}
+              </textarea>
             </fieldset>
           ))}
 
