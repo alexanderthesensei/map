@@ -69,7 +69,7 @@ export function MapEdit() {
     <div>
       <div className="grid">
         <MapView map={map} />
-        <form>
+        <form aria-readonly={addingPoint}>
           <input
             placeholder="image url"
             type="url"
@@ -95,7 +95,7 @@ export function MapEdit() {
             />
             <input
               type="button"
-              value="Add a point"
+              value={addingPoint ? "Click on the map" : "Add a point"}
               onClick={() => {
                 if (!newEntryName) {
                   alert("must have a name");
