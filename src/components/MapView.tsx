@@ -19,7 +19,7 @@ export function MapView({ map: { url, entries } }: { map: Map }) {
             onClick={() => {
               modal.setOpen(true);
               modal.setTitle(entry.title);
-              modal.setDescription(entry.description);
+              modal.setDescription(entry.description || "");
               modal.setChildren(entry.children);
             }}
           />
@@ -95,20 +95,32 @@ function renderModal() {
     Modal: () => (
       <div className={className}>
         <dialog open={open} onClick={handleClick}>
-          <article className="grid">
-            <div>
+          {description ? (
+            <article className="grid">
+              <div>
+                <h2>
+                  {title + " "}
+                  <button onClick={close}>X</button>
+                </h2>
+                <p>{description}</p>
+              </div>
+              <div>
+                {children.map((child) => (
+                  <MapView map={child} />
+                ))}
+              </div>
+            </article>
+          ) : (
+            <article>
               <h2>
                 {title + " "}
                 <button onClick={close}>X</button>
               </h2>
-              <p>{description}</p>
-            </div>
-            <div>
               {children.map((child) => (
                 <MapView map={child} />
               ))}
-            </div>
-          </article>
+            </article>
+          )}
         </dialog>
       </div>
     ),

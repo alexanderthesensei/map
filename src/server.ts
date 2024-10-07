@@ -7,7 +7,7 @@ export type Map = {
 // todo rename to point
 export type Entry = {
   title: string;
-  description: string;
+  description?: string;
   children: Map[];
 
   markerX: number;
@@ -26,7 +26,6 @@ export const map: Map = {
   entries: [
     {
       title: "world map",
-      description: "an example to demo the platform",
       children: [
         {
           url: "https://upload.wikimedia.org/wikipedia/commons/1/17/BlankMap-World-noborders.png",
@@ -117,7 +116,6 @@ export const map: Map = {
     },
     {
       title: "2.5d",
-      description: "an example with a 2.5d map to demo the platform",
       children: [
         {
           url: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Forig11.deviantart.net%2F562f%2Ff%2F2016%2F089%2Fc%2Fb%2Fcb44bc8b275d1eafbbf7fcf13c400b7c-d9x29tt.jpg&f=1&nofb=1&ipt=0cc2a54840da7c00628d6e2af39e857f60d4fb1fd9501f9be5ba5a0752a27e8b&ipo=images",
