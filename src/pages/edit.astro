@@ -1,0 +1,53 @@
+---
+import { MapEdit } from '../components/MapEdit.tsx'
+import { map } from '../server'
+---
+
+<html lang="ru">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<link
+		  rel="stylesheet"
+		  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.amber.min.css"
+		>
+		<title>курсовая (?) по истории</title>
+	</head>
+	<body>
+		<main class="container">
+      <MapEdit client:load />
+		</main>
+		<style is:global>
+			img {
+				max-height: 100dvh;
+			}
+
+			.marker {
+				border-radius: 60px;
+				aspect-ratio: 1;
+				width: 50px;
+				padding: 0;
+				margin: 0;
+				transform: translate(-25px, -25px);
+			}
+
+			.mapview {
+				height: 100%;
+				width: fit-content;
+				margin: 0 auto;
+			}
+
+      .cross * {
+        cursor: crosshair !important;
+      }
+
+			dialog article {
+				max-width: 100%;
+			}
+
+			body {overflow: hidden;}
+		</style>
+	</body>
+</html>

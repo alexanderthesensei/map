@@ -9,8 +9,8 @@ export function MapView({ map: { url, entries } }: { map: Map }) {
 
   return (
     <div className="mapview">
-      <div style={{ position: "relative" }}>
-        <img src={url} alt="map" />
+      <div style={{ position: "relative" }} className="points">
+        <img src={url} alt="Не могу загрузить карту" />
         {entries.map((entry) => (
           <Marker
             x={entry.markerX}
