@@ -3,14 +3,6 @@ import { type Entry, type Map } from "../server";
 import { MapView } from "./MapView";
 import { codeToHtml } from "shiki";
 
-const EMPTY_ENTRY: Entry = {
-  title: "",
-  description: "",
-  markerX: 0,
-  markerY: 0,
-  children: [],
-};
-
 export function MapEdit() {
   const [url, setUrl] = useState(
     "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Russian_Federation_%28orthographic_projection%29_-_All_Territorial_Disputes.svg/2880px-Russian_Federation_%28orthographic_projection%29_-_All_Territorial_Disputes.svg.png"
@@ -18,25 +10,28 @@ export function MapEdit() {
   const [entries, setEntries] = useState<Entry[]>([]);
 
   const [newEntryName, setNewEntryName] = useState("");
-  const [addingPoint, setAddingPoint] = useState(false);
+  const [addingPointTo, setAddingPointTo] = useState("");
 
-  const [code, setCode] = useState("");
+  function updateEntry(idx: number, update: Entry) {
+    setEntries([...entries.slice(0, idx), update, ...entries.slice(idx + 1)]);
+  }
 
-  const map: Map = {
-    url,
-    entries,
-  };
+  function updateEntryChild(entryIdx: number, childIdx: number, update: Map) {
+    const entry = entries[entryIdx];
+    updateEntry(entryIdx, {...entry, children: [
+      ...entry.children.slice(0, childIdx),
+      update,
+      ...entry.children.slice(childIdx + 1),
+    ]})
+  }
 
   useEffect(() => {
-    codeToHtml(JSON.stringify(map, null, 4), {
-      lang: "json",
-      theme: "one-dark-pro",
-    }).then(setCode);
-  }, [url, entries]);
+    if (addingPointTo == "") {
+      return;
+    }
 
-  useEffect(() => {
     const map = document
-      .querySelector(".points")
+      .querySelector(addingPointTo)
       ?.getBoundingClientRect() as DOMRect;
 
     function handler(event: MouseEvent) {
@@ -54,22 +49,80 @@ export function MapEdit() {
         },
       ]);
       setNewEntryName("");
-      setAddingPoint(false);
+      setAddingPointTo("");
       window.removeEventListener("mouseup", handler);
       document.body.className = "";
     }
 
-    if (addingPoint) {
-      window.addEventListener("mouseup", handler);
-      document.body.className = "cross";
-    }
-  }, [addingPoint]);
+    window.addEventListener("mouseup", handler);
+    document.body.className = "cross";
+  }, [addingPointTo]);
+
+  return (
+    <MapEditComponent
+      addingPointTo={addingPointTo}
+      setAddingPointTo={setAddingPointTo}
+      url={url}
+      setUrl={setUrl}
+      entries={entries}
+      setEntries={setEntries}
+      updateEntry={updateEntry}
+      newEntryTitle={newEntryName}
+      setNewEntryTitle={setNewEntryName}
+    />
+  );
+}
+
+function wrap(setter: (val: string) => any) {
+  return (event: any) => setter(event.target.value);
+}
+
+interface MapEditComponentProps {
+  addingPointTo: string;
+  setAddingPointTo(val: string): void;
+  url: string;
+  setUrl(val: string): void;
+  entries: Entry[];
+  setEntries(val: Entry[]): void;
+  updateEntry(idx: number, val: Entry): void;
+  updateEntryChild(entryIdx: number, childIdx: number, val: Map): void;
+  newEntryTitle: string;
+  setNewEntryTitle(val: string): void;
+}
+
+function MapEditComponent({
+  addingPointTo,
+  setAddingPointTo,
+  url,
+  setUrl,
+  entries,
+  setEntries,
+  updateEntry,
+  updateEntryChild,
+  newEntryTitle,
+  setNewEntryTitle,
+}: MapEditComponentProps) {
+  const [mapUid, _] = useState("map" + crypto.randomUUID());
+  console.log({ id: "#" + mapUid });
+
+  const map: Map = {
+    url,
+    entries,
+  };
+
+  const [code, setCode] = useState("");
+  useEffect(() => {
+    codeToHtml(JSON.stringify(map, null, 4), {
+      lang: "json",
+      theme: "one-dark-pro",
+    }).then(setCode);
+  }, [url, entries]);
 
   return (
     <div>
       <div className="grid">
-        <MapView map={map} />
-        <form aria-readonly={addingPoint}>
+        <MapView map={map} uid={mapUid} />
+        <form aria-readonly={Boolean(addingPointTo)}>
           <input
             placeholder="image url"
             type="url"
@@ -80,13 +133,46 @@ export function MapEdit() {
             <fieldset key={entry.title}>
               <fieldset role="group">
                 <input readOnly value={entry.title} />
-                <input type="button" value="Delete" onClick={() => setEntries(entries.toSpliced(idx, 1))} />
+                <input
+                  type="button"
+                  value="Delete"
+                  onClick={() => setEntries(entries.toSpliced(idx, 1))}
+                />
               </fieldset>
-              <textarea placeholder="description" onInput={(event) => setEntries([
-                ...entries.slice(0, idx),
-                {...entry, description: event.currentTarget.value},
-                ...entries.slice(idx+1)
-              ])}>{entry.description}</textarea>
+              <textarea
+                placeholder="description"
+                onInput={(event) =>
+                  updateEntry(idx, {
+                    ...entry,
+                    description: event.currentTarget.value,
+                  })
+                }
+                value={entry.description}
+              />
+
+              {entry.children.map((child, childIdx) => (
+                <MapEditComponent
+                  addingPointTo={addingPointTo}
+                  setAddingPointTo={setAddingPointTo}
+                  url={child.url}
+                  setUrl={(url) => updateEntryChild(idx, childIdx, {...child, url})}
+                  entries={child.entries}
+                  setEntries={(entries) => updateEntryChild(idx, childIdx, {...child, entries})}
+                  updateEntry={(entryIdx, update) => }
+                  newEntryTitle={newEntryName}
+                  setNewEntryTitle={setNewEntryName}
+                />
+              ))}
+              <input
+                type="button"
+                value="Add child"
+                onClick={() =>
+                  updateEntry(idx, {
+                    ...entry,
+                    children: [...entry.children, { url: "", entries: [] }],
+                  })
+                }
+              />
             </fieldset>
           ))}
 
@@ -94,18 +180,18 @@ export function MapEdit() {
             <input
               placeholder="Name"
               type="text"
-              value={newEntryName}
-              onInput={wrap(setNewEntryName)}
+              value={newEntryTitle}
+              onInput={wrap(setNewEntryTitle)}
             />
             <input
               type="button"
-              value={addingPoint ? "Click on the map" : "Add a point"}
+              value={addingPointTo ? "Click on the map" : "Add a point"}
               onClick={() => {
-                if (!newEntryName) {
+                if (!newEntryTitle) {
                   alert("must have a name");
                   return;
                 }
-                setAddingPoint(true);
+                setAddingPointTo("#" + mapUid);
               }}
             />
           </fieldset>
@@ -114,8 +200,4 @@ export function MapEdit() {
       <div dangerouslySetInnerHTML={{ __html: code }} />
     </div>
   );
-}
-
-function wrap(setter: (val: string) => any) {
-  return (event: any) => setter(event.target.value);
 }
