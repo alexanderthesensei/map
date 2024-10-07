@@ -3,14 +3,6 @@ import { type Entry, type Map } from "../server";
 import { MapView } from "./MapView";
 import { codeToHtml } from "shiki";
 
-const EMPTY_ENTRY: Entry = {
-  title: "",
-  description: "",
-  markerX: 0,
-  markerY: 0,
-  children: [],
-};
-
 export function MapEdit() {
   const [url, setUrl] = useState(
     "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Russian_Federation_%28orthographic_projection%29_-_All_Territorial_Disputes.svg/2880px-Russian_Federation_%28orthographic_projection%29_-_All_Territorial_Disputes.svg.png"
@@ -71,7 +63,7 @@ export function MapEdit() {
         <MapView map={map} />
         <form aria-readonly={addingPoint}>
           <input
-            placeholder="image url"
+            placeholder="Ссылка на фоновое изображение"
             type="url"
             onInput={wrap(setUrl)}
             value={url}
@@ -82,12 +74,12 @@ export function MapEdit() {
                 <input readOnly value={entry.title} />
                 <input
                   type="button"
-                  value="Delete"
+                  value="Удалить"
                   onClick={() => setEntries(entries.toSpliced(idx, 1))}
                 />
               </fieldset>
               <textarea
-                placeholder="description"
+                placeholder="Описание (необязательно)"
                 onInput={(event) =>
                   setEntries([
                     ...entries.slice(0, idx),
@@ -103,17 +95,19 @@ export function MapEdit() {
 
           <fieldset role="group">
             <input
-              placeholder="Name"
+              placeholder="Название"
               type="text"
               value={newEntryName}
               onInput={wrap(setNewEntryName)}
             />
             <input
               type="button"
-              value={addingPoint ? "Click on the map" : "Add a point"}
+              value={
+                addingPoint ? "Укажите, куда её поставить" : "Добавить точку"
+              }
               onClick={() => {
                 if (!newEntryName) {
-                  alert("must have a name");
+                  alert("Должно быть название");
                   return;
                 }
                 setAddingPoint(true);
