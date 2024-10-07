@@ -1,26 +1,3 @@
-// todo rename
-export type Map = {
-  url: string;
-  entries: Entry[];
-};
-
-// todo rename to point
-export type Entry = {
-  title: string;
-  description?: string;
-  children: Map[];
-
-  markerX: number;
-  markerY: number;
-};
-
-function imgToMap(url: string): Map {
-  return {
-    url,
-    entries: [],
-  };
-}
-
 export const map: Map = {
   url: "/map/index.svg",
   entries: [
@@ -137,3 +114,31 @@ export const map: Map = {
     },
   ],
 };
+
+// ------------------------------------------------------------------------------------------------------------------- //
+// ------------------------------ КОНЕЦ РЕДАКТИРУЕМОЙ ПОЛЬЗОВАТЕЛЕМ ЧАСТИ ФАЙЛА -------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------- //
+
+
+// todo rename
+export type Map = {
+  url: string;
+  entries: Entry[];
+};
+
+// todo rename to point
+export type Entry = {
+  title: string;
+  description?: string;
+  children: Map[];
+
+  markerX: number;
+  markerY: number;
+};
+
+function imgToMap(url: string): Map {
+  return {
+    url,
+    entries: [],
+  };
+}

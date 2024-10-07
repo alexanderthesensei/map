@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Map } from "../server";
+import type { Map } from "../data";
 
 const OPENING_MODAL_DELAY = 600;
 
