@@ -20,6 +20,12 @@ jobs:
           script: |
             const repo = context.repo.owner + '/' + context.repo.repo;
             const ref = context.ref;
-            const link = `https://raw.githubusercontent.com/${repo}/${ref}/src/data.json`;
-            console.log(link);
+            const datajson = `https://raw.githubusercontent.com/${repo}/${ref}/src/data.json`;
+            const datalink = encodeURIComponent(datajson);
+            const pulls = github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              base: ref.split('/').at(-1),
+            });
+            console.log(pulls);
 
