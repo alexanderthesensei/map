@@ -17,5 +17,9 @@ jobs:
     steps:
       - uses: actions/github-script@v7
         with:
-          script: console.log(context);
+          script: |
+            const repo = context.repo.owner + '/' + context.repo.repo;
+            const ref = context.ref;
+            const link = `https://raw.githubusercontent.com/${repo}/${ref}/src/data.json`;
+            console.log(link);
 
