@@ -26,6 +26,8 @@ jobs:
               repo: context.repo.repo,
             });
             const pull = pulls.data.find(pr => pr.head.ref === branch);
+            console.log(pulls)
+            console.log(pull)
             await github.rest.issues.createComment({
               issue_number: pull.number,
               owner: context.repo.owner,
