@@ -4,8 +4,8 @@ import type { Map } from "../types";
 const OPENING_MODAL_DELAY = 600;
 
 export function MapView({ map }: { map: Map | string }) {
-  if (typeof(map) === 'string') {
-    return <img src={map} alt="Не могу загрузить изображение" />
+  if (typeof map === "string") {
+    return <img src={map} alt="Не могу загрузить изображение" />;
   }
 
   const { url, entries } = map;
