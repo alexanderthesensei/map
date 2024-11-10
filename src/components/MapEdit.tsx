@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { type Entry, type Map } from "../data";
+import { type Entry, type Map } from "../types";
 import { MapView } from "./MapView";
 import { codeToHtml } from "shiki";
 
