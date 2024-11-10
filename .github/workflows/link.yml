@@ -5,6 +5,7 @@ on:
   pull_request:
     types:
       - opened
+      - reopened
   workflow_dispatch:
 
 jobs:
@@ -21,16 +22,4 @@ jobs:
             const datajson = `https://raw.githubusercontent.com/${repo}/${ref}/src/data.json`;
             const datalink = encodeURIComponent(datajson);
             const previewlink = 'https://alexanderthesensei.github.io/map/preview?data=' + datalink;
-            const pulls = await github.rest.pulls.list({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            });
-            const pull = pulls.data.find(pr => pr.head.ref === branch);
-            console.log(pulls)
-            console.log(pull)
-            await github.rest.issues.createComment({
-              issue_number: pull.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `Предварительный просмотр доступен [здесь](${previewlink})`,
-            })
+            console.log(context.issue)
