@@ -1,9 +1,14 @@
 import { useState } from "react";
-import type { Map } from "../data";
+import type { Map } from "../types";
 
 const OPENING_MODAL_DELAY = 600;
 
-export function MapView({ map: { url, entries } }: { map: Map }) {
+export function MapView({ map }: { map: Map | string }) {
+  if (typeof(map) === 'string') {
+    return <img src={map} alt="Не могу загрузить изображение" />
+  }
+
+  const { url, entries } = map;
   const modal = renderModal();
   const Modal = modal.Modal;
 
@@ -56,7 +61,7 @@ function renderModal() {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [children, setChildren] = useState<Map[]>([]);
+  const [children, setChildren] = useState<(Map | string)[]>([]);
   const [opening, setOpening] = useState(false);
 
   const className = open

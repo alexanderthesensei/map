@@ -1,6 +1,5 @@
 ---
-import { MapView } from '../components/MapView.tsx'
-import map from '../data.json'
+import { BranchPreview } from '../components/BranchPreview.tsx'
 ---
 
 <html lang="ru">
@@ -13,11 +12,11 @@ import map from '../data.json'
 		  rel="stylesheet"
 		  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.amber.min.css"
 		>
-		<title>курсовая (?) по истории</title>
+		<title>PREVIEW курсовая (?) по истории</title>
 	</head>
 	<body>
 		<main>
-			<MapView map={map} client:load />
+			<BranchPreview client:load />
 		</main>
 		<style is:global>
 			main {
