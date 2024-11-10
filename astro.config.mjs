@@ -8,8 +8,6 @@ import netlify from '@astrojs/netlify';
 // https://astro.build/config
 export default defineConfig({
   integrations: [react()],
-  site: 'https://alexanderthesensei.github.io',
-  base: 'map',
   output: 'server',
   adapter: netlify()
 });

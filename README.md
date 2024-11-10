@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/be75eb03-a7a1-4b9e-af7e-efb962bd209f/deploy-status)](https://app.netlify.com/sites/kubstumap/deploys)
+
 # Интерактивные карты
 Это наш проект по истории. Наша преподавательница увидела нечто подобное в музее и захотела создать свою версию.
 
