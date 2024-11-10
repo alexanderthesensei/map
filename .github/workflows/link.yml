@@ -2,8 +2,9 @@
 name: Add preview link
 
 on:
-  push:
-    branches-ignore: [main]
+  pull_request:
+    types:
+      - opened
   workflow_dispatch:
 
 jobs:
