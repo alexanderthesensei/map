@@ -17,8 +17,12 @@ jobs:
         with:
           script: |
             const repo = context.repo.owner + '/' + context.repo.repo;
-            const ref = context.ref;
-            const branch = ref.split('/').at(-1);
+
+            const branch = await github.rest.pulls.list({ owner: context.repo.owner, repo: context.repo.repo })
+              .then(response => response.data)
+              .then(data => data.find(pr => pr.number === context.issue.number))
+              .then(pull => pull.head.ref);
+            const ref = 'refs/heads/' + branch;
 
             const datajson = `https://raw.githubusercontent.com/${repo}/${ref}/src/data.json`;
             const datalink = encodeURIComponent(datajson);
