@@ -1,27 +1,14 @@
 {
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Russian_Federation_%28orthographic_projection%29_-_All_Territorial_Disputes.svg/2880px-Russian_Federation_%28orthographic_projection%29_-_All_Territorial_Disputes.svg.png",
-    "entries": [
-        {
-            "title": "просто точка",
-            "description": "полюс нафиг! ПОЛЮС! Обитатель:",
-            "markerX": 50.10496850944717,
-            "markerY": 24.96629289621617,
-            "children": [
-				{
-					"url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Russian_Federation_%28orthographic_projection%29_-_All_Territorial_Disputes.svg/2880px-Russian_Federation_%28orthographic_projection%29_-_All_Territorial_Disputes.svg.png",
-					"entries": [
-						{
-							"title": "просто точка",
-							"description": "полюс нафиг! ПОЛЮС! Обитатель:",
-							"markerX": 50.10496850944717,
-							"markerY": 24.96629289621617,
-							"children": [
-								"https://upload.wikimedia.org/wikipedia/commons/8/83/Iceland-1979445_%28cropped_3%29.jpg"
-							]
-						}
-					]
-				}
+	"url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Russian_Federation_%28orthographic_projection%29_-_All_Territorial_Disputes.svg/2880px-Russian_Federation_%28orthographic_projection%29_-_All_Territorial_Disputes.svg.png",
+	"entries": [
+		{
+			"title": "просто точка",
+			"description": "не полюс уже! СИБИРЬ! Обитатель:",
+			"markerX": 55,
+			"markerY": 40,
+			"children": [
+				"https://upload.wikimedia.org/wikipedia/commons/8/83/Iceland-1979445_%28cropped_3%29.jpg"
 			]
-        }
-    ]
+		}
+	]
 }
